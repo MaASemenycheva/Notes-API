@@ -24,24 +24,6 @@ auth_router=APIRouter(
 
 session=Session(bind=engine)
 
-@auth_router.get('/')
-async def hello(Authorize:AuthJWT=Depends()):
-
-    """
-        ## Sample hello world route
-    
-    """
-    try:
-        Authorize.jwt_required()
-
-    except Exception as e:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid Token"
-        )
-
-    return {"message":"Hello World"}
-
-
 @auth_router.post('/signup',
     status_code=status.HTTP_201_CREATED
 )
